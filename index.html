@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>蘑菇丁自动打卡</title>
+    </head>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .content {
+            width: 100%;
+            height: 100vh;
+            background-color: #f2f2f2;
+            background-image: url('https://cdn.jsdelivr.net/gh/duogongneng/MyBlogImg/imgmoguding2logo.png');
+            background-size: 70px;
+            animation: backimg 1s;
+            animation-iteration-count: infinite;
+        }
+
+        @keyframes backimg {
+            from {
+                background-color: #f2f2f2;
+            }
+
+            to {
+                background-size: 70px;
+            }
+        }
+
+        .content h1 {
+            display: inline-block;
+            width: 100%;
+            height: 100px;
+            margin-top: 160px;
+            text-align: center;
+            color: rgb(76, 76, 76);
+        }
+
+        .content .user {
+            width: 100%;
+            height: 300px;
+            /* background: aquamarine; */
+        }
+
+        .content .user input {
+            display: block;
+            width: 300px;
+            height: 35px;
+            font-size: 1.1em;
+            margin: auto;
+            margin-bottom: 20px;
+            background: transparent;
+            border: 1px solid #939393;
+            text-indent: 1em;
+            border-radius: 2px;
+
+        }
+
+        .content .user button {
+            cursor: pointer;
+            display: block;
+            width: 330px;
+            height: 35px;
+            font-size: 1.1em;
+            margin: auto;
+            margin-top: 20px;
+            background: transparent;
+            border: 1px solid #939393;
+            margin-bottom: 20px;
+            border-radius: 2px;
+        }
+
+        .content .user button:hover {
+            background: #8d8c8c;
+            color: #f2f2f2;
+
+        }
+
+        .content .user span {
+            display: block;
+            height: 20px;
+            font-size: 1.2em;
+            color: red;
+            text-align: center;
+        }
+
+        .content .text {
+            width: 600px;
+            /* height: 100px; */
+            margin: auto;
+            padding-bottom: 50px;
+        }
+
+        .content .text h2 {
+            margin-bottom: 10px;
+        }
+
+        .content .text p {
+            font-size: 1.1em;
+            text-indent: 1em;
+            line-height: 1.5;
+            color: rgb(47, 47, 47);
+        }
+
+        .content .foot {
+            width: 100%;
+            height: 50px;
+            /* background: fuchsia; */
+            text-align: center;
+        }
+
+        .content .foot p {
+            display: inline-block;
+            margin-top: 20px;
+            color: rgb(83, 82, 82);
+        }
+    </style>
+
+    <body>
+        <div class="content">
+            <h1>蘑菇丁自动打卡(测试)</h1>
+            <div class="user">
+                <input type="text" name="username" autocomplete="off" placeholder="手机号">
+                <input type="password" autocomplete="off" name="password" placeholder="密码">
+                <span></span>
+                <button id="login">登陆</button>
+            </div>
+            <div class="text">
+                <h2>使用说明</h2>
+                <p style="font-size: 1.1em; color: blue;">目前程序只是 博主自己在用 如果你们也要使用可以登陆 但是不保证稳定性</p>
+                <p>1.输入账号密码后会每天给你打卡</p>
+                <p>2.每天会早8点打上班卡</p>
+                <p>3.每天会晚6点打下班卡</p>
+                <p>4.程序会有不稳定请定期查看软件是否打卡成功</p>
+                <p>5.有要求可以跟我说</p>
+                <p>6.博客提供api可以自行对接</p>
+            </div>
+            <div class="foot">
+                <p>版权信息： <a href="https://www.79bk.cn/">乔越博客</a> </p>
+            </div>
+        </div>
+    </body>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.10.0/jquery.min.js"></script>
+    <script>
+        $('#login').click((e) => {
+            let username = $("input[name='username']").val()
+            let password = $("input[name='password']").val()
+            if (username != '' && password != '') {
+                $.ajax({
+                    url: '/addUser',
+                    data: {
+                        username,
+                        password
+                    },
+                    method: "POST",
+                    success: function (res) {
+                        $("input[name='username']").val("")
+                        $("input[name='password']").val("")
+                        $('.user>span').text(res.msg)
+                        setTimeout(() => {
+                            $('.user>span').text("")
+                        }, 3000);
+                    }
+                })
+            }
+        })
+
+    </script>
+
+</html>
