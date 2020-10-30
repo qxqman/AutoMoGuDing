@@ -1,3 +1,14 @@
+/**
+ * ============================================
+ *  @author : 乔越博客
+ *  @host : http://www.79bk.cn/
+ *  @version : v1.0
+ *  @description : 对蘑菇丁APP实施自动签到功能
+ *  @email : duogongnengq@163.com
+ *  @Copyright : 2020 乔越博客. All rights reserved
+ *  ============================================
+ */
+
 // 使用 Koa 框架
 const Koa = require("koa");
 // 接收请求数据
