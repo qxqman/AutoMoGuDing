@@ -99,6 +99,12 @@ POST /practice/plan/v1/getPlanByStu
 Authorization: 通过登陆获取
 ```
 
+## 数据库
+
+你只需把本项目中`user.sql  ` 用mysql导入即可
+
+然后在 app.js 中连接上你的数据即可
+
 ## 前端页面
 
 前端页面我也进行了简单的注册 凑合看吧
