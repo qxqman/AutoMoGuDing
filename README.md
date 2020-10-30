@@ -4,7 +4,7 @@
 
 但是我们会忘记打卡 并且感觉这很麻烦 所以就自己写了写这个程序
 
-![edition](https://img.shields.io/badge/edition-v1.0-red.svg)[![Badge](https://img.shields.io/badge/link-79kb.cn-branch.svg)](https://www.79bk.cn/)
+![edition](https://img.shields.io/badge/edition-v1.0-red.svg)  [![Badge](https://img.shields.io/badge/link-79kb.cn-branch.svg)](https://www.79bk.cn/)
 
 ## 基本
 
