@@ -59,9 +59,14 @@ const Ltoken = async (username, password, isUser) => {
             token = data.token
             userid = data.userId
             if (isUser.length == 1) {
-                connection.promise().query(`UPDATE user SET  password = "${password}", token = "${data.token}" WHERE userId = "${data.userId}"`)
+                connection.promise().query(`UPDATE user SET  password = "${password}",isWrong = "0", token = "${data.token}" WHERE userId = "${data.userId}"`)
             } else if (isUser.length == 0) {
                 connection.promise().query(`INSERT INTO user (userId,username,phone,gender,token,schoolName,depName,majorName,className,studentNumber,grade,password) VALUES (${data.userId},"${data.orgJson.userName}","${data.phone}","${data.gender}","${data.token}","${data.orgJson.schoolName}","${data.orgJson.depName}","${data.orgJson.majorName}","${data.orgJson.className}",${data.orgJson.studentNumber},"${data.orgJson.grade}","${password}")`);
+            }
+        } else {
+            // 如果账号密码错误
+            if (isUser.length == 1) {
+                connection.promise().query(`UPDATE user SET isWrong = "1" WHERE userId = "${data.userId}"`)
             }
         }
     });
@@ -160,7 +165,7 @@ const Commuting = (type, planId, token, userId, phone, password) => {
 }
 // 将所以用户的信息拿出来
 const userInfo = async (type) => {
-    let [users] = await connection.promise().query(`SELECT userId,phone,token,password,planId FROM user`)
+    let [users] = await connection.promise().query(`SELECT userId,phone,token,password,planId FROM user WHERE isWrong = "0"`)
     await users.forEach(async (item, index) => {
         await Commuting(type, item.planId, item.token, item.userId, item.phone, item.password)
     })
@@ -191,6 +196,13 @@ router.post("/addUser", async (ctx, next) => {
     await login("END", "79bk.cn", username, password, false).then((res) => {
         ctx.body = res
     })
+})
+// 获取密码错误的用户
+router.get('/getWrong', async (ctx, next) => {
+    // 设置跨域
+    ctx.set("Access-Control-Allow-Origin", "*")
+    let [wrongUser] = await connection.promise().query(`SELECT username,studentNumber FROM user WHERE isWrong = "1"`);
+    ctx.body = wrongUser
 })
 
 // 设置中间件 导入路由

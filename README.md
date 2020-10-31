@@ -18,6 +18,8 @@
 
 ## 服务API
 
+#### 登陆本服务
+
 本程序运行好了提供了一个API 就是添加用户的API
 
 ```
@@ -31,6 +33,23 @@ POST /addUser
   username:"手机号",
   password:"密码"
 }
+```
+
+#### 获取密码错误的用户
+
+```
+GET /getwrong
+```
+
+返回数据
+
+```
+[
+  {
+    "username":"乔越博客",
+    "studentNumber":883888232
+  }
+]
 ```
 
 ## 蘑菇丁API

@@ -89,18 +89,18 @@
             text-align: center;
         }
 
-        .content .text {
-            width: 600px;
+        .content .infofoot .text {
+            width: 40%;
             /* height: 100px; */
             margin: auto;
             padding-bottom: 50px;
         }
 
-        .content .text h2 {
+        .content .infofoot .text h2 {
             margin-bottom: 10px;
         }
 
-        .content .text p {
+        .content .infofoot .text p {
             font-size: 1.1em;
             text-indent: 1em;
             line-height: 1.5;
@@ -119,6 +119,30 @@
             margin-top: 20px;
             color: rgb(83, 82, 82);
         }
+
+        .infofoot {
+            display: flex;
+        }
+
+        .infofoot .wrong {
+            width: 40%;
+            /* background: #8d8c8c; */
+        }
+
+        .infofoot .wrong ul {
+            display: block;
+            margin-left: 50px;
+
+            color: red;
+
+        }
+
+        .infofoot .wrong ul li {
+            list-style: none;
+            margin-top: 10px;
+            font-size: 1.3em;
+            font-weight: 500;
+        }
     </style>
 
     <body>
@@ -130,15 +154,24 @@
                 <span></span>
                 <button id="login">登陆</button>
             </div>
-            <div class="text">
-                <h2>使用说明</h2>
-                <p style="font-size: 1.1em; color: blue;">目前程序只是 博主自己在用 如果你们也要使用可以登陆 但是不保证稳定性</p>
-                <p>1.输入账号密码后会每天给你打卡</p>
-                <p>2.每天会早8点打上班卡</p>
-                <p>3.每天会晚6点打下班卡</p>
-                <p>4.程序会有不稳定请定期查看软件是否打卡成功</p>
-                <p>5.有要求可以跟我说</p>
-                <p>6.博客提供api可以自行对接</p>
+            <div class="infofoot">
+                <div class="text">
+                    <h2>使用说明</h2>
+                    <p style="font-size: 1.1em; color: blue;">目前程序只是 博主自己在用 如果你们也要使用可以登陆 但是不保证稳定性</p>
+                    <p>1.输入账号密码后会每天给你打卡</p>
+                    <p>2.每天会早8点打上班卡</p>
+                    <p>3.每天会晚6点打下班卡</p>
+                    <p>4.程序会有不稳定请定期查看软件是否打卡成功</p>
+                    <p>5.有要求可以跟我说</p>
+                    <p>6.博客提供api可以自行对接</p>
+                </div>
+                <!-- 错误的用户 -->
+                <div class="wrong">
+                    <h2>密码错误</h2>
+                    <ul>
+
+                    </ul>
+                </div>
             </div>
             <div class="foot">
                 <p>版权信息： <a href="https://www.79bk.cn/">乔越博客</a> </p>
@@ -167,6 +200,19 @@
                         }, 3000);
                     }
                 })
+            }
+        })
+
+
+
+        $.ajax({
+            url: '/getwrong',
+            success: function (res) {
+                let html = ''
+                res.forEach((element, index) => {
+                    html += `<li>${index + 1}. ${element.username}:${element.studentNumber}</li>`
+                });
+                $('.wrong>ul').html(html)
             }
         })
 

@@ -11,7 +11,7 @@
  Target Server Version : 50562
  File Encoding         : 65001
 
- Date: 30/10/2020 15:35:40
+ Date: 31/10/2020 20:10:31
 */
 
 SET NAMES utf8mb4;
@@ -35,6 +35,7 @@ CREATE TABLE `user` (
   `grade` varchar(255) DEFAULT NULL COMMENT '入学时间',
   `password` varchar(255) DEFAULT NULL COMMENT '密码',
   `planId` varchar(255) DEFAULT NULL COMMENT '打卡必备',
+  `isWrong` varchar(255) DEFAULT '0' COMMENT '是否密码错误',
   PRIMARY KEY (`userId`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
