@@ -143,12 +143,12 @@ const Commuting = (type, planId, token, userId, phone, password) => {
         "country": "中国",
         "state": "NORMAL",
         "attendanceType": "",
-        "address": "北京市 · 科技楼",
+        "address": "重庆",
         "type": type,
-        "longitude": "116.326664",
-        "city": "北京市",
-        "province": "北京市",
-        "latitude": "39.937648"
+        "longitude": "106.639282",
+        "city": "重庆市",
+        "province": "重庆市",
+        "latitude": "29.771812"
     };
     axios({
         method: 'post',
